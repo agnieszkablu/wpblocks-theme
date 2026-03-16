@@ -1,0 +1,16 @@
+body {
+  background-color: #fafafa;
+}
+
+.wp-block {
+  max-width: 800px;
+
+  &[data-align="full"] {
+    max-width: none;
+  }
+
+  &[data-align="wide"] {
+    max-width: 1000px;
+  }
+}
+
