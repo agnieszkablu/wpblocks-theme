@@ -31,6 +31,30 @@ function blocks_theme_setup()
 	add_theme_support('align-wide');
 	add_theme_support('align-full');
 
+	add_theme_support('editor-color-palette', array(
+		array(
+			'name'  => esc_html__('Primary', 'blocks-theme'),
+			'slug'  => 'primary',
+			'color' => '#0073aa',
+		),
+		array(
+			'name'  => esc_html__('Secondary', 'blocks-theme'),
+			'slug'  => 'secondary',
+			'color' => '#005177',
+		),
+		array(
+			'name'  => esc_html__('Accent', 'blocks-theme'),
+			'slug'  => 'accent',
+			'color' => '#d54e21',
+		),
+		array(
+			'name'  => esc_html__('White', 'blocks-theme'),
+			'slug'  => 'white',
+			'color' => '#ffffff',
+		),
+	));
+
+	add_theme_support('disable-custom-gradients');
 	/*
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
