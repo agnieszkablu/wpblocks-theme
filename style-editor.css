@@ -30,3 +30,11 @@ body {
 .has-primary-color {
   color: #4169e1;
 }
+
+.has-primary-to-secondary-gradient-background {
+  background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, var(--wp--preset--color--secondary) 100%);
+}
+
+.has-accent-to-primary-gradient-background {
+  background: linear-gradient(135deg, var(--wp--preset--color--accent) 0%, var(--wp--preset--color--primary) 100%)
+}

@@ -22,10 +22,6 @@ if (! defined('_S_VERSION')) {
  */
 function blocks_theme_setup()
 {
-
-	add_theme_support('editor-styles');
-	add_editor_style('style-editor.css');
-
 	add_theme_support('responsive-embeds');
 
 	add_theme_support('align-wide');
@@ -54,7 +50,24 @@ function blocks_theme_setup()
 		),
 	));
 
-	add_theme_support('disable-custom-gradients');
+	// add_theme_support('disable-custom-gradients');
+
+	add_theme_support('editor-gradient-presets', array(
+		array(
+			'name'     => esc_html__('Primary to Secondary', 'blocks-theme'),
+			'gradient' => 'linear-gradient(135deg, var(--wp--preset--color--primary) 0%, var(--wp--preset--color--secondary) 100%)',
+			'slug'     => 'primary-to-secondary',
+		),
+		array(
+			'name'     => esc_html__('Accent to Primary', 'blocks-theme'),
+			'gradient' => 'linear-gradient(135deg, var(--wp--preset--color--accent) 0%, var(--wp--preset--color--primary) 100%)',
+			'slug'     => 'accent-to-primary',
+		),
+	));
+
+	add_theme_support('custom-spacing');
+
+
 	/*
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
@@ -176,9 +189,6 @@ add_action('widgets_init', 'blocks_theme_widgets_init');
  */
 function blocks_theme_scripts()
 {
-	wp_enqueue_style('blocks-theme-style', get_stylesheet_uri(), array(), _S_VERSION);
-	wp_style_add_data('blocks-theme-style', 'rtl', 'replace');
-
 	wp_enqueue_script('blocks-theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
@@ -186,6 +196,22 @@ function blocks_theme_scripts()
 	}
 }
 add_action('wp_enqueue_scripts', 'blocks_theme_scripts');
+
+// Load global custom properties through the block-editor iframe asset pipeline.
+remove_action('enqueue_block_editor_assets', 'wp_enqueue_global_styles_css_custom_properties');
+add_action('enqueue_block_assets', 'wp_enqueue_global_styles_css_custom_properties');
+
+/**
+ * Enqueue styles for both the front end and the block editor iframe.
+ */
+function blocks_theme_block_styles()
+{
+	wp_enqueue_style('blocks-theme-style', get_stylesheet_uri(), array(), _S_VERSION);
+	wp_style_add_data('blocks-theme-style', 'rtl', 'replace');
+
+	wp_enqueue_style('blocks-theme-editor-style', get_template_directory_uri() . '/style-editor.css', array(), _S_VERSION);
+}
+add_action('enqueue_block_assets', 'blocks_theme_block_styles');
 
 /**
  * Implement the Custom Header feature.
