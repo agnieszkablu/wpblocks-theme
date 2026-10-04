@@ -512,9 +512,9 @@ dd {
 }
 
 /* Make sure embeds and iframes fit their containers. */
-embed,
-iframe,
-object {
+.site embed,
+.site iframe,
+.site object {
   max-width: 100%;
 }
 
@@ -969,9 +969,6 @@ textarea {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-}
-
-body {
   background-color: #fafafa;
 }
 
